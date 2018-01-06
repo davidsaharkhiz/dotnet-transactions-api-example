@@ -1,14 +1,21 @@
 ﻿
+using System;
+
 namespace TransactionAPI.Models
 {
+
+	public enum TransactionStatus
+	{
+		Settled,
+		Unknown
+	}
+
 	/// <summary>
 	/// Representation of a transaction
 	/// </summary>
 	public interface ITransaction
 	{
-		int ID { get; set; }
-		string Name { get; set; }
-
+		Guid ID { get; set; }
 	}
 
 }
