@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TransactionAPI.Models;
 
 namespace TransactionAPI.Controllers
 {
@@ -14,16 +15,14 @@ namespace TransactionAPI.Controllers
             return View();
         }
 
-        // GET: Transaction/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
 		// GET: Transaction/Details/5
 		public ActionResult List()
 		{
-			return View();
+			var viewModel = new ViewModels.Transaction.TransactionListViewModel
+			{
+				TransactionList = new TransactionList()
+			};
+			return View(viewModel);
 		}
 
 	}
