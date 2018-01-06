@@ -15,6 +15,7 @@ namespace TransactionAPI.Models
 		/// todo: let's move this to a service maybe?
 		/// </summary>
 		public void Normalize() {
+
 		}
 
 	}
