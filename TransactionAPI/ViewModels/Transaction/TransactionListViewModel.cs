@@ -3,10 +3,12 @@ namespace TransactionAPI.ViewModels.Transaction
 {
 	public class TransactionListViewModel
 	{
-		public string GrossEmployeeCompensation { get; set; }
-		public int NumberOfEmployees { get; set; }
-		public int NumberOfDependents { get; set; }
-		public string TotalEmployeeBenefits { get; set; }
+		public string GrossEmployeeCompensation { get; set; } = "0";
+		public int NumberOfEmployees { get; set; } = 0;
+		public int NumberOfDependents { get; set; } = 0;
+		public string TotalEmployeeBenefits { get; set; } = "0";
+
+		public ITransactionList TransactionList { get; set; }
 	}
 }
 

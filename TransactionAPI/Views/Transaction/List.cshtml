@@ -85,25 +85,10 @@
 				</thead>
 				<tbody>
 
-					@foreach (var employee in Model.Employees)
+					@foreach (var transaction in Model.TransactionList.Transactions)
 					{
 					<tr>
-						<td>@employee.Name</td>
-						<td>@employee.CompensationPerPaycheckFormatted</td>
-						<td>@employee.BaseCostOfBenefitsFormatted()</td>
-						<td>@employee.BenefitsDiscountPercentage()% off</td>
-						<td>@employee.NumberOfDependents</td>
-						<td>@employee.BaseCostOfDependentBenefitsFormatted()</td>
-						<td>
-							@foreach (var summary in employee.BenefitsDiscountSummary())
-							{
-							<p>@summary</p>
-							}
-						</td>
-						<td>@employee.BenefitsPerPaycheckFormatted</td>
-						<td>@employee.NetCostPerPaycheckFormatted</td>
-						<td>@employee.AnnualBenefitsDiscountFormatted</td>
-						<td>@employee.NetCostFormatted</td>
+						<td>@transaction.Name</td>
 					</tr>
 					}
 

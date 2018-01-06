@@ -11,6 +11,8 @@ namespace TransactionAPI.Models
 
 		public int ID { get; set; }
 
+		public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+
 		/// <summary>
 		/// todo: let's move this to a service maybe?
 		/// </summary>

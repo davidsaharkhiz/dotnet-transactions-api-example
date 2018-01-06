@@ -7,16 +7,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="David Saharkhiz">
 	<title>Employee Benefits - @ViewData["Title"]</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
-	<!-- Bootstrap core CSS-->
-	<link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css">
-	<!-- Custom fonts for this template-->
-	<link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
-	<!-- Page level plugin CSS-->
-	<link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.css">
-	<!-- Custom styles for this template-->
-	<link href="~/css/sb-admin.css" rel="stylesheet">
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<!-- Navigation-->
