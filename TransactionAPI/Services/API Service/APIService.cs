@@ -8,5 +8,6 @@ namespace TransactionAPI.Services.APIService
 	public class APIService
 	{
 		public IAPIClient client;
+
 	}
 }

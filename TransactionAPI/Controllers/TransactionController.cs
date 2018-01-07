@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TransactionAPI.Models;
 using TransactionAPI.Services;
+using TransactionAPI.Services.APIService;
 
 namespace TransactionAPI.Controllers
 {
@@ -35,7 +36,7 @@ namespace TransactionAPI.Controllers
 		public ActionResult List()
 		{
 
-			
+			APIService.
 
 			var viewModel = new ViewModels.Transaction.TransactionListViewModel
 			{
