@@ -23,7 +23,7 @@ namespace TransactionAPI.Controllers
 		}
 
 		public TransactionController(TranscardAPIService service) {
-
+			_apiService = service;
 		}
 
         // GET: Transaction

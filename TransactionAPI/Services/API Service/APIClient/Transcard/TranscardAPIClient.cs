@@ -44,9 +44,9 @@ namespace TransactionAPI.Services.APIService
 		public TransactionList GetTransactionList() {
 
 			var list = new TransactionList();
-
 			EndpointSuffix = "transactions";
-
+			var result = Execute();
+			//todo: actually parse response
 			return list;
 		}
 
@@ -55,8 +55,8 @@ namespace TransactionAPI.Services.APIService
 		/// </summary>
 		private string Execute() {
 
-			Uri finalUri;
-			var finalUriString = Endpoint.AbsolutePath + EndpointSuffix;
+			Uri finalUri = Endpoint;
+			var finalUriString = $"{Endpoint.ToString()}{EndpointSuffix}/";
 			if (!String.IsNullOrEmpty(EndpointSuffix)) {
 				try
 				{
@@ -70,9 +70,8 @@ namespace TransactionAPI.Services.APIService
 
 			using (var client = new HttpClient())
 			{
-
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + HeaderAuthorizationKey);
-				var response = client.GetStringAsync(Endpoint).Result;
+				var response = client.GetStringAsync(finalUri).Result;
 				return response;
 
 			}
