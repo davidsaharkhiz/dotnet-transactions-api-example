@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ParseHelper.cs" />
     <Compile Include="Models\TransactionList\ITransactionList.cs" />
     <Compile Include="Models\TransactionList\TransactionList.cs" />
     <Compile Include="Models\Transaction\ITransaction.cs" />

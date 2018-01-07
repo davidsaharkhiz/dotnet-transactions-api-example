@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TransactionAPI.Models;
 using TransactionAPI.Services;
 using TransactionAPI.Services.APIService;
+using TransactionAPI.Helpers;
 
 namespace TransactionAPI.Controllers
 {
@@ -39,6 +40,7 @@ namespace TransactionAPI.Controllers
 			{
 				TransactionList = _apiService.client.GetTransactionList()
 			};
+
 			return View(viewModel);
 		}
 

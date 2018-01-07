@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web;
-using TransactionAPI.Services.API_Service.Response;
-using System.Threading.Tasks;
 using TransactionAPI.Models;
 using System.Configuration;
+using TransactionAPI.Helpers;
 
 namespace TransactionAPI.Services.APIService
 {
@@ -33,8 +29,6 @@ namespace TransactionAPI.Services.APIService
 			Endpoint = new Uri(transcardUri);
 			HeaderAuthorizationKey = authorizationKey;
 
-			
-
 		}
 		
 
@@ -45,15 +39,18 @@ namespace TransactionAPI.Services.APIService
 
 			var list = new TransactionList();
 			EndpointSuffix = "transactions";
+			
 			var result = Execute();
-			//todo: actually parse response
+
+			//now map data to our typed object #todo
+
 			return list;
 		}
 
 		/// <summary>
 		/// get the raw response from the API
 		/// </summary>
-		private string Execute() {
+		private Dictionary<string, string> Execute() {
 
 			Uri finalUri = Endpoint;
 			var finalUriString = $"{Endpoint.ToString()}{EndpointSuffix}/";
@@ -72,15 +69,11 @@ namespace TransactionAPI.Services.APIService
 			{
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + HeaderAuthorizationKey);
 				var response = client.GetStringAsync(finalUri).Result;
-				return response;
-
+				return ParseHelper.BuildDictionaryFromTabbedAPIResponse(response);
 			}
 			
 
 		}
-
-
-		
 
 	}
 }
