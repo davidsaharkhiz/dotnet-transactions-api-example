@@ -70,7 +70,6 @@
 			<table class="table table-bordered" id="dataTable" cellspacing="0">
 				<thead>
 					<tr>
-						<th>Name</th>
 						<th>Paycheck</th>
 						<th>Standard Benefits (for employee only)</th>
 						<th>Benefits Discount (for employee only)</th>
@@ -88,7 +87,7 @@
 					@foreach (var transaction in Model.TransactionList.Transactions)
 					{
 					<tr>
-						<td>@transaction.Name</td>
+						<td>@transaction.Amount</td>
 					</tr>
 					}
 
