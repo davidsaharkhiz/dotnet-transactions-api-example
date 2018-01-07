@@ -37,11 +37,10 @@ namespace TransactionAPI.Services.APIService
 		/// </summary>
 		public TransactionList GetTransactionList() {
 
-			var list = new TransactionList();
+			
 			EndpointSuffix = "transactions";
 			
-			var result = Execute();
-
+			var list = new TransactionList(GetResponseDictionary());
 			//now map data to our typed object #todo
 
 			return list;
@@ -50,7 +49,7 @@ namespace TransactionAPI.Services.APIService
 		/// <summary>
 		/// get the raw response from the API
 		/// </summary>
-		private Dictionary<string, string> Execute() {
+		private Dictionary<string, List<string>> GetResponseDictionary() {
 
 			Uri finalUri = Endpoint;
 			var finalUriString = $"{Endpoint.ToString()}{EndpointSuffix}/";

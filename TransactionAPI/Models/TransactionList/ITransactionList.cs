@@ -10,11 +10,6 @@ namespace TransactionAPI.Models
 
 		List<Transaction> Transactions { get; set; }
 
-		/// <summary>
-		/// todo: let's move this to a service maybe?
-		/// </summary>
-		void Normalize();
-
 	}
 
 }

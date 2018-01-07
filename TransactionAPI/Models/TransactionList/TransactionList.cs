@@ -19,14 +19,23 @@ namespace TransactionAPI.Models
 		public TransactionList() {
 
 		}
-		
 
 		/// <summary>
-		/// todo: let's move this to a service maybe?
+		/// coerces a response from the to a typed transactionlist. I know for the purposes of this demo it might be overkill but I can't stand passing around strings, mutation becomes a nightmare without strong typing.
 		/// </summary>
-		public void Normalize() {
+		/// <param name="responseToCoerce">Response from the API</param>
+		public TransactionList(Dictionary<string, List<string>> responseToCoerce) {
+			for(var i = 0; i < responseToCoerce.Count(); i++) {
+				var amount = responseToCoerce["Amount"][i];
+				var datePosted = responseToCoerce["Date Posted"][i];
 
+				//so this has an amount, etc, transaction should do it
+				var transaction = new Transaction(amount, datePosted);
+				Transactions.Add(transaction);
+			}
 		}
+		
+
 
 	}
 }
