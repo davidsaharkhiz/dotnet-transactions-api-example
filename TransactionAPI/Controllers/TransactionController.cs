@@ -12,18 +12,18 @@ namespace TransactionAPI.Controllers
     public class TransactionController : Controller
     {
 
-		private APIService _apiService;
+		private TranscardAPIService _apiService;
 
 		/// <summary>
 		/// So, I normally wouldn't do this, but I believe we were barred from using 3PL's such as Autofac or Unity, but I still wanted to leverage constructor injection of this service
 		/// </summary>
 		public TransactionController()
-			: this(new APIService())
+			: this(new TranscardAPIService())
 		{
 		}
 
-		public TransactionController(APIService service) {
-			_apiService = service;
+		public TransactionController(TranscardAPIService service) {
+
 		}
 
         // GET: Transaction
@@ -36,7 +36,7 @@ namespace TransactionAPI.Controllers
 		public ActionResult List()
 		{
 
-			APIService.
+			var blah = new TransactionList(_apiService.client);
 
 			var viewModel = new ViewModels.Transaction.TransactionListViewModel
 			{

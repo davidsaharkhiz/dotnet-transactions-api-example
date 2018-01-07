@@ -9,7 +9,7 @@ namespace TransactionAPI.Services.APIService
 {
 	public interface IAPIClient
 	{
-		string Endpoint { get; set; }
+		Uri Endpoint { get; set; }
 
 		IResponse Execute();
 

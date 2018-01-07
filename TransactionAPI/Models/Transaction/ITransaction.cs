@@ -16,6 +16,9 @@ namespace TransactionAPI.Models
 	public interface ITransaction
 	{
 		Guid ID { get; set; }
+
+		
+
 	}
 
 }
