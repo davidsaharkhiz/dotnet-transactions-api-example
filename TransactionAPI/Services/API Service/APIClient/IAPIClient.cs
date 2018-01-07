@@ -10,8 +10,5 @@ namespace TransactionAPI.Services.APIService
 	public interface IAPIClient
 	{
 		Uri Endpoint { get; set; }
-
-		IResponse Execute();
-
 	}
 }

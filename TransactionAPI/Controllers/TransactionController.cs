@@ -35,12 +35,9 @@ namespace TransactionAPI.Controllers
 		// GET: Transaction/Details/5
 		public ActionResult List()
 		{
-
-			var blah = new TransactionList(_apiService.client);
-
 			var viewModel = new ViewModels.Transaction.TransactionListViewModel
 			{
-				TransactionList = new TransactionList()
+				TransactionList = _apiService.client.GetTransactionList()
 			};
 			return View(viewModel);
 		}

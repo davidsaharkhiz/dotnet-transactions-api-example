@@ -16,7 +16,7 @@ namespace TransactionAPI.Services.APIService
 		//todo: I would store this in a secure octopus variable normally
 		public string HeaderAuthorizationKey { get; set; }
 		public Uri Endpoint { get; set; }
-
+		public string EndpointSuffix { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Default constructor, pulls values from config
@@ -31,36 +31,55 @@ namespace TransactionAPI.Services.APIService
 			}
 
 			Endpoint = new Uri(transcardUri);
-			HeaderAuthorizationKey = "TransCardDevTestKey";
+			HeaderAuthorizationKey = authorizationKey;
+
+			
+
+		}
+		
+
+		/// <summary>
+		/// Returns a transactionList from the API
+		/// </summary>
+		public TransactionList GetTransactionList() {
+
+			var list = new TransactionList();
+
+			EndpointSuffix = "transactions";
+
+			return list;
 		}
 
 		/// <summary>
-		/// On the fly creation
+		/// get the raw response from the API
 		/// </summary>
-		/// <param name="headerAuthorizationKey">The key to be used in the request</param>
-		/// <param name="endpoint">uri to hit. Failure to parse will result in a UriFormatException</param>
-		public TranscardAPIClient(string headerAuthorizationKey, string endpoint) {
-			HeaderAuthorizationKey = headerAuthorizationKey;
-			Endpoint = new Uri(endpoint);
-		}
+		private string Execute() {
 
-		public IResponse Execute() {
+			Uri finalUri;
+			var finalUriString = Endpoint.AbsolutePath + EndpointSuffix;
+			if (!String.IsNullOrEmpty(EndpointSuffix)) {
+				try
+				{
+					finalUri = new Uri(finalUriString);
+				}
+				catch (UriFormatException ex) {
+					throw new UriFormatException($"The Uri {finalUriString} for this client is invalid", ex);
+				}
 
-		
+			}
 
 			using (var client = new HttpClient())
 			{
 
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + HeaderAuthorizationKey);
-				var response = client.GetStringAsync(Endpoint);
-				// todo; parse response
+				var response = client.GetStringAsync(Endpoint).Result;
+				return response;
+
 			}
-			return new TransactionListResponse
-			{
-				TransactionList = new TransactionList()
-			};
+			
 
 		}
+
 
 		
 

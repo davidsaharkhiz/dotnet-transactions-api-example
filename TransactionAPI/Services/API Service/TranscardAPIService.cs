@@ -10,7 +10,7 @@ namespace TransactionAPI.Services.APIService
 		public TranscardAPIClient client;
 
 		public TranscardAPIService() {
-			client = new TranscardAPIClient(endpoint, authorizationKey);
+			client = new TranscardAPIClient();
 		}
 
 	}

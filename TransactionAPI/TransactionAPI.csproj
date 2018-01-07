@@ -152,8 +152,11 @@
     <Compile Include="Models\Transaction\ITransaction.cs" />
     <Compile Include="Models\Transaction\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\API Service\APIService.cs" />
-    <Compile Include="Services\API Service\IAPIService.cs" />
+    <Compile Include="Services\API Service\APIClient\Transcard\TranscardAPIClient.cs" />
+    <Compile Include="Services\API Service\APIClient\IAPIClient.cs" />
+    <Compile Include="Services\API Service\TranscardAPIService.cs" />
+    <Compile Include="Services\API Service\Response\IResponse.cs" />
+    <Compile Include="Services\API Service\Response\TransactionListResponse.cs" />
     <Compile Include="ViewModels\Transaction\TransactionListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
