@@ -26,12 +26,24 @@ namespace TransactionAPI.Models
 		/// <param name="responseToCoerce">Response from the API</param>
 		public TransactionList(Dictionary<string, List<string>> responseToCoerce) {
 			for(var i = 0; i < responseToCoerce.Count(); i++) {
-				var amount = responseToCoerce["Amount"][i];
-				var datePosted = responseToCoerce["Date Posted"][i];
 
-				//so this has an amount, etc, transaction should do it
-				var transaction = new Transaction(amount, datePosted);
-				Transactions.Add(transaction);
+				try
+				{
+					var amount = responseToCoerce["Amount"][i];
+					var datePosted = responseToCoerce["Date Posted"][i];
+					var id = responseToCoerce["Transaction ID"][i];
+					var status = responseToCoerce["Status"][i];
+					var category = responseToCoerce["Category"][i];
+					var description = responseToCoerce["Description"][i];
+
+					//so this has an amount, etc, transaction should do it
+					var transaction = new Transaction(amount, datePosted, id, description, category, status);
+					Transactions.Add(transaction);
+
+				}
+				catch (KeyNotFoundException ex) {
+					throw new KeyNotFoundException("Transaction from the API could not be coerced into a typed transaction, a supplied column does not match the expected response.", ex);
+				}
 			}
 		}
 		

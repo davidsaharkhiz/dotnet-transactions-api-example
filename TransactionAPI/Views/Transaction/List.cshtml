@@ -70,16 +70,11 @@
 			<table class="table table-bordered" id="dataTable" cellspacing="0">
 				<thead>
 					<tr>
-						<th>Paycheck</th>
-						<th>Standard Benefits (for employee only)</th>
-						<th>Benefits Discount (for employee only)</th>
-						<th>Number of Dependents</th>
-						<th>Standard Dependent Benefits</th>
-						<th>Discount By Dependent</th>
-						<th>Total Benefits Per Paycheck</th>
-						<th>Adjusted Paycheck</th>
-						<th>Yearly Benefits Deduction</th>
-						<th>Adjusted Yearly Salary</th>
+						<th>Date Posted</th>
+						<th>Amount</th>
+						<th>Category</th>
+						<th>Transaction ID</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -87,7 +82,11 @@
 					@foreach (var transaction in Model.TransactionList.Transactions)
 					{
 					<tr>
+						<td>@transaction.DatePosted.ToString("MM dd yyyy HH:mm");</td>
 						<td>@transaction.Amount</td>
+						<td>@transaction.Category</td>
+						<td>@transaction.ID</td>
+						<td>@transaction.StatusForUI</td>
 					</tr>
 					}
 

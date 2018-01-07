@@ -22,11 +22,16 @@ namespace TransactionAPI.Models
 		/// <summary>
 		/// Create a transaction with the supplied values from the API
 		/// </summary>
-		public Transaction(string amount, string datePosted) {
+		public Transaction(string amount, string datePosted, string id, string description, string category, string status) {
 			// Developer's notes: Hey, normally I would tryparse this stuff since in a production environment we'd rather not grind the user experience to a halt,
 			//but for the purposes of the demo I'm not accounting for this kind of user experience stuff.
 			Amount = ParseHelper.CoerceSignedStringToDecimal(amount);
 			DatePosted = DateTime.Parse(datePosted);
+			ID = Guid.Parse(id);
+			Description = Description;
+			Category = category;
+			Status = TransactionStatus.Unknown; // todo: flesh out a mapper for this later, not really useful for the purposes of the demo
+			StatusForUI = status;
 		}
 
 	}
