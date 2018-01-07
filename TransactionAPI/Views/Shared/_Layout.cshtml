@@ -19,7 +19,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="View Employees and Dependents">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="View Transaction List">
 					<a class="nav-link" href="@Url.Action("list", "transaction")">
 						<i class="fa fa-fw fa-table"></i>
 						<span class="nav-link-text">View Transaction List</span>
@@ -84,21 +84,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- Bootstrap core JavaScript-->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<!-- Core plugin JavaScript-->
-		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-		<!-- Page level plugin JavaScript-->
-		<script src="vendor/chart.js/Chart.min.js"></script>
-		<script src="vendor/datatables/jquery.dataTables.js"></script>
-		<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-		<!-- Custom scripts for all pages-->
-		<script src="js/sb-admin.min.js"></script>
-		<!-- Custom scripts for this page-->
-		<script src="js/sb-admin-datatables.min.js"></script>
-		<script src="js/sb-admin-charts.min.js"></script>
 	</div>
+	@Scripts.Render("~/bundles/sbadmin")
 	@RenderSection("Scripts", required: false)
 </body>
 </html>
