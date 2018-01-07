@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace TransactionAPI.Models
+﻿namespace TransactionAPI.Models
 {
 
 	public enum TransactionStatus
@@ -15,10 +12,7 @@ namespace TransactionAPI.Models
 	/// </summary>
 	public interface ITransaction
 	{
-		Guid ID { get; set; }
-
-		
-
+		string ID { get; set; }
 	}
 
 }

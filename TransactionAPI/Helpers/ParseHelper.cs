@@ -71,7 +71,7 @@ namespace TransactionAPI.Helpers
 		/// <param name="amount">raw string data from an API</param>
 		/// <returns></returns>
 		public static decimal CoerceSignedStringToDecimal(string amount) {
-			amount = Regex.Replace(amount, "[^a-zA-Z0-9_.()]+", "", RegexOptions.Compiled);
+			amount = Regex.Replace(amount, "[^a-zA-Z0-9_.()]+", string.Empty, RegexOptions.Compiled);
 			return Decimal.Parse(amount, 
 									  NumberStyles.AllowParentheses |
 									  NumberStyles.AllowThousands |

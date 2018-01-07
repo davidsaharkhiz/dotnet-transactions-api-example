@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using TransactionAPI.Helpers;
 
 namespace TransactionAPI.Models
@@ -11,7 +7,7 @@ namespace TransactionAPI.Models
     public class Transaction : ITransaction
     {
 
-		public Guid ID { get; set; }
+		public string ID { get; set; }
 		public DateTime DatePosted { get; set; }
 		public string Description { get; set; }
 		public decimal Amount { get; set; }
@@ -27,7 +23,7 @@ namespace TransactionAPI.Models
 			//but for the purposes of the demo I'm not accounting for this kind of user experience stuff.
 			Amount = ParseHelper.CoerceSignedStringToDecimal(amount);
 			DatePosted = DateTime.Parse(datePosted);
-			ID = Guid.Parse(id);
+			ID = id;
 			Description = Description;
 			Category = category;
 			Status = TransactionStatus.Unknown; // todo: flesh out a mapper for this later, not really useful for the purposes of the demo
