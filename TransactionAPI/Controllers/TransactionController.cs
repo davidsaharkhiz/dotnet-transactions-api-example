@@ -36,15 +36,19 @@ namespace TransactionAPI.Controllers
 
 			// Group our purchases into categories (excluding income)
 			var categorySummaries = new List<ViewModels.Transaction.TransactionListViewModel.CategorySummary>();
-			var categories = transactionList.Transactions.Where(t => t.Amount < 0).GroupBy(t => t.Category);
+			if (transactionList.Transactions.Any()) {
+				var categories = transactionList.Transactions.Where(t => t.Amount < 0).GroupBy(t => t.Category);
 
-			foreach(var category in categories) {
-				var categorySummary = new ViewModels.Transaction.TransactionListViewModel.CategorySummary
+				foreach (var category in categories)
 				{
-					CategoryName = category.First().Category,
-					Sum = category.Sum(c => c.Amount) * -1 // We want to display these as positive values
-				};
-				categorySummaries.Add(categorySummary);
+					var categorySummary = new ViewModels.Transaction.TransactionListViewModel.CategorySummary
+					{
+						CategoryName = category.First().Category,
+						Sum = category.Sum(c => c.Amount) * -1 // We want to display these as positive values
+					};
+					categorySummaries.Add(categorySummary);
+				}
+
 			}
 
 			// Populate the viewmodel with the transactionlist and category lists
