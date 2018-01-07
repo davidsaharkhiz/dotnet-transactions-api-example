@@ -25,7 +25,7 @@ namespace TransactionAPI.Models
 		/// </summary>
 		/// <param name="responseToCoerce">Response from the API</param>
 		public TransactionList(Dictionary<string, List<string>> responseToCoerce) {
-			for(var i = 0; i < responseToCoerce.Count(); i++) {
+			for(var i = 0; i < responseToCoerce.First().Value.Count(); i++) {
 
 				try
 				{
