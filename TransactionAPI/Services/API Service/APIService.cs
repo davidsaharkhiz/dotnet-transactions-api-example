@@ -5,11 +5,8 @@ using System.Web;
 
 namespace TransactionAPI.Services.APIService
 {
-	public class APIService : IAPIService
+	public class APIService
 	{
-		public TransactionClient client;
-
-
-
+		public IAPIClient client;
 	}
 }

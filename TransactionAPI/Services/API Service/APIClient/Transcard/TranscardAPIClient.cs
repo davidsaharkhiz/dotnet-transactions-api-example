@@ -5,10 +5,10 @@ using System.Web;
 
 namespace TransactionAPI.Services.APIService
 {
-	public class TransactionClient : IAPIClient
+	public class TranscardAPIClient : IAPIClient
 	{
 		//todo: I would store this in a secure octopus variable normally
-		public string AuthorizationKey { get; set; }
+		public string HeaderAuthorizationKey { get; set; }
 		public string Endpoint { get; set; }
 	}
 }
