@@ -7,6 +7,7 @@ using TransactionAPI.Models;
 using TransactionAPI.Services;
 using TransactionAPI.Services.APIService;
 using TransactionAPI.Helpers;
+using TransactionAPI.ViewModels;
 
 namespace TransactionAPI.Controllers
 {
@@ -36,9 +37,13 @@ namespace TransactionAPI.Controllers
 		// GET: Transaction/Details/5
 		public ActionResult List()
 		{
+			var transactionList = _apiService.client.GetTransactionList();
 			var viewModel = new ViewModels.Transaction.TransactionListViewModel
 			{
-				TransactionList = _apiService.client.GetTransactionList()
+				TransactionList = transactionList,
+				CategorySummaries = new List<ViewModels.Transaction.TransactionListViewModel.CategorySummary>(), //todo!!
+				TotalMonthlyExpenses = transactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount),
+				TotalMonthlyIncome = transactionList.Transactions.Where(t => t.Amount > 0).Sum(t => t.Amount)
 			};
 
 			return View(viewModel);

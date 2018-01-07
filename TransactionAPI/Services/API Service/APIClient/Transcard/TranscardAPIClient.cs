@@ -4,6 +4,7 @@ using System.Net.Http;
 using TransactionAPI.Models;
 using System.Configuration;
 using TransactionAPI.Helpers;
+using System.Linq;
 
 namespace TransactionAPI.Services.APIService
 {
@@ -12,6 +13,10 @@ namespace TransactionAPI.Services.APIService
 		//todo: I would store this in a secure octopus variable normally
 		public string HeaderAuthorizationKey { get; set; }
 		public Uri Endpoint { get; set; }
+
+		/// <summary>
+		/// Additional URL suffix after the base endpoint
+		/// </summary>
 		public string EndpointSuffix { get; set; } = string.Empty;
 
 		/// <summary>
@@ -40,8 +45,11 @@ namespace TransactionAPI.Services.APIService
 			
 			EndpointSuffix = "transactions";
 			
+			//create a typed object from our response dictionary
 			var list = new TransactionList(GetResponseDictionary());
-			//now map data to our typed object #todo
+
+			// normalize
+			list.Transactions = list.Transactions.Distinct().ToList();
 
 			return list;
 		}
