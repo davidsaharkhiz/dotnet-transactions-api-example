@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TransactionAPI.Models;
-using TransactionAPI.Services;
 using TransactionAPI.Services.APIService;
-using TransactionAPI.Helpers;
-using TransactionAPI.ViewModels;
 
 namespace TransactionAPI.Controllers
 {
@@ -28,20 +22,36 @@ namespace TransactionAPI.Controllers
 			_apiService = service;
 		}
 
-        // GET: Transaction
         public ActionResult Index()
         {
             return View();
         }
 
-		// GET: Transaction/Details/5
+		/// <summary>
+		/// Displays a list of transactions and a summary by category, as well as various metrics on spending
+		/// </summary>
 		public ActionResult List()
 		{
 			var transactionList = _apiService.client.GetTransactionList();
+
+			// Group our purchases into categories (excluding income)
+			var categorySummaries = new List<ViewModels.Transaction.TransactionListViewModel.CategorySummary>();
+			var categories = transactionList.Transactions.Where(t => t.Amount < 0).GroupBy(t => t.Category);
+
+			foreach(var category in categories) {
+				var categorySummary = new ViewModels.Transaction.TransactionListViewModel.CategorySummary
+				{
+					CategoryName = category.First().Category,
+					Sum = category.Sum(c => c.Amount) * -1 // We want to display these as positive values
+				};
+				categorySummaries.Add(categorySummary);
+			}
+
+			// Populate the viewmodel with the transactionlist and category lists
 			var viewModel = new ViewModels.Transaction.TransactionListViewModel
 			{
 				TransactionList = transactionList,
-				CategorySummaries = new List<ViewModels.Transaction.TransactionListViewModel.CategorySummary>(), //todo!!
+				CategorySummaries = categorySummaries,
 				TotalMonthlyExpenses = transactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount),
 				TotalMonthlyIncome = transactionList.Transactions.Where(t => t.Amount > 0).Sum(t => t.Amount)
 			};
