@@ -10,7 +10,7 @@ namespace TransactionAPI.Services.APIService
 {
 	public class TranscardAPIClient : IAPIClient
 	{
-		//todo: I would store this in a secure octopus variable normally
+		// note to interviewer: I would store this in a secure octopus variable normally
 		public string HeaderAuthorizationKey { get; set; }
 		public Uri Endpoint { get; set; }
 
@@ -42,13 +42,12 @@ namespace TransactionAPI.Services.APIService
 		/// </summary>
 		public TransactionList GetTransactionList() {
 
-			
 			EndpointSuffix = "transactions";
 			
 			// Create a typed object from our response dictionary
 			var list = new TransactionList(GetResponseDictionary());
 
-			// Normalize the data
+			// Normalize the data based on ID
 			if (list.Transactions.Any()) {
 				
 				list.Transactions = list.Transactions.GroupBy(d => new { d.ID })
