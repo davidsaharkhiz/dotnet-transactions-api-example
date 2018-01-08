@@ -1,4 +1,7 @@
-﻿@model TransactionAPI.ViewModels.Transaction.TransactionListViewModel
+﻿@{
+	ViewBag.Title = "List and Categories";
+}
+@model TransactionAPI.ViewModels.Transaction.TransactionListViewModel
 <!-- Icon Cards-->
 <div class="row employee-benefits-homepage-icon-row">
 	<div class="col-xl-3 col-sm-6 mb-3">
@@ -78,7 +81,7 @@
 					@foreach (var transaction in Model.TransactionList.Transactions)
 					{
 					<tr>
-						<td>@transaction.DatePosted.ToString("MM dd yyyy")</td>
+						<td>@transaction.DatePosted.ToString("MMMM dd, yyyy")</td>
 						<td>$@transaction.Amount</td>
 						<td>@transaction.Category</td>
 						<td>@transaction.ID</td>

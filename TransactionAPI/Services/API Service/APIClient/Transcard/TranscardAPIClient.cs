@@ -45,18 +45,26 @@ namespace TransactionAPI.Services.APIService
 			
 			EndpointSuffix = "transactions";
 			
-			//create a typed object from our response dictionary
+			// Create a typed object from our response dictionary
 			var list = new TransactionList(GetResponseDictionary());
 
-			// normalize
-			list.Transactions = list.Transactions.Distinct().ToList();
-
+			// Normalize the data
+			if (list.Transactions.Any()) {
+				
+				list.Transactions = list.Transactions.GroupBy(d => new { d.ID })
+									 .Select(d => d.First())
+									 .ToList();
+			}
 			return list;
 		}
 
+
+		
+
 		/// <summary>
-		/// get the raw response from the API
+		/// Get the raw response from the API
 		/// </summary>
+		/// <returns>A key/associated values dictionary</returns>
 		private Dictionary<string, List<string>> GetResponseDictionary() {
 
 			Uri finalUri = Endpoint;

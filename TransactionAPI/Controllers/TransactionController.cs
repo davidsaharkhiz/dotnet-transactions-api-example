@@ -44,7 +44,7 @@ namespace TransactionAPI.Controllers
 					var categorySummary = new ViewModels.Transaction.TransactionListViewModel.CategorySummary
 					{
 						CategoryName = category.First().Category,
-						Sum = category.Sum(c => c.Amount) * -1 // We want to display these as positive values
+						Sum = category.Sum(c => c.Amount) * -1 // We want to display this as absolute value
 					};
 					categorySummaries.Add(categorySummary);
 				}
@@ -56,7 +56,7 @@ namespace TransactionAPI.Controllers
 			{
 				TransactionList = transactionList,
 				CategorySummaries = categorySummaries,
-				TotalMonthlyExpenses = transactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount),
+				TotalMonthlyExpenses = transactionList.Transactions.Where(t => t.Amount < 0).Sum(t => t.Amount) * -1, //We want to display this as absolute value
 				TotalMonthlyIncome = transactionList.Transactions.Where(t => t.Amount > 0).Sum(t => t.Amount)
 			};
 
