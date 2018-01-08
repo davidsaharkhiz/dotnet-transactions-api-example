@@ -10,7 +10,6 @@ as a breakdown of various metrics.
 This was an enjoyable task to work on because the supplied endpoint was perhaps intentionally less than ideal with random spaces in column names, tabbed-separated data instead of JSON. Good stuff.
 
 
-Questions for Interviewer:
+Notes for Interviewer:
 
-I was a little confused by what it meant to remove duplicate transactions, in a normal environment I would ask for feedback first. I assumed we wanted to remove duplicate transaction ids, but a less literal interpretation might mean removing 
-items with the same cost on the same date.
+I introduced a little test coverage, but it's not 100%, just wanted to test a few core things. The level of coverage I typically apply depends on the work environment and the compelexity of the implementation.

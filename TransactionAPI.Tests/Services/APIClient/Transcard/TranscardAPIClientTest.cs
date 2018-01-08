@@ -10,8 +10,13 @@ namespace TransactionAPI.Tests.Services.APIClient.Transcard
 	[TestClass]
 	public class TranscardAPIClientTest
 	{
-		
-		private static Dictionary<string, List<string>> moqData = new Dictionary<string, List<string>>()
+
+		private Mock<TranscardAPIClient> mockClient;
+
+		[TestInitialize]
+		public void SetUp() {
+			mockClient = new Mock<TranscardAPIClient>();
+			mockClient.Setup(x => x.GetResponseDictionary()).Returns(new Dictionary<string, List<string>>()
 			{
 				{ "Amount", new List<string> { "100", "100"  }},
 				{ "Date Posted", new List<string> { "06/02/1986", "06/02/1986" } },
@@ -19,9 +24,8 @@ namespace TransactionAPI.Tests.Services.APIClient.Transcard
 				{ "Status", new List<string> { "SETTLED", "SETTLED" } },
 				{ "Category", new List<string> { "Fishing", "Skiing" } },
 				{ "Description", new List<string> { "fishing is a fun hobby.", "Skiing is a fun hobby." } },
-			};
-
-
+			});
+		}
 
 		[TestMethod]
 		public void APIServiceInstantiation()
@@ -32,9 +36,6 @@ namespace TransactionAPI.Tests.Services.APIClient.Transcard
 		[TestMethod]
 		public void APIServiceGetTransactionList()
 		{
-			var service = new TranscardAPIService().client.GetTransactionList();
-			var mockClient = new Mock<TranscardAPIClient>();
-			mockClient.Setup(x => x.GetResponseDictionary()).Returns(moqData);
 			var transactionList = mockClient.Object.GetTransactionList();
 			var firstTransaction = transactionList.Transactions.First();
 			Assert.AreEqual(firstTransaction.Amount, 100);
@@ -47,7 +48,8 @@ namespace TransactionAPI.Tests.Services.APIClient.Transcard
 		[TestMethod]
 		public void APIServiceGetTransactionListNormalizesData()
 		{
-			
+			var transactionList = mockClient.Object.GetTransactionList();
+			Assert.IsTrue(transactionList.Transactions.Count == 1);
 		}
 
 	}
