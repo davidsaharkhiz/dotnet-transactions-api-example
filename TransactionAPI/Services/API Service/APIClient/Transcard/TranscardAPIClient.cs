@@ -65,7 +65,7 @@ namespace TransactionAPI.Services.APIService
 		/// Get the raw response from the API
 		/// </summary>
 		/// <returns>A key/associated values dictionary</returns>
-		private Dictionary<string, List<string>> GetResponseDictionary() {
+		protected Dictionary<string, List<string>> GetResponseDictionary() {
 
 			Uri finalUri = Endpoint;
 			var finalUriString = $"{Endpoint.ToString()}{EndpointSuffix}/";
