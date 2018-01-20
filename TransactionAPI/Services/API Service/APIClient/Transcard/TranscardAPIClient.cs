@@ -5,6 +5,7 @@ using TransactionAPI.Models;
 using System.Configuration;
 using TransactionAPI.Helpers;
 using System.Linq;
+using System.IO;
 
 namespace TransactionAPI.Services.APIService
 {
@@ -82,12 +83,29 @@ namespace TransactionAPI.Services.APIService
 			using (var client = new HttpClient())
 			{
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + HeaderAuthorizationKey);
-				var response = client.GetStringAsync(finalUri).Result;
+				var response = client.GetStringAsync(finalUri + "breakme").Result;
+
+				if(response == null) {
+					response = GetMockResponse();
+				}
+
 				return ParseHelper.BuildDictionaryFromTabbedAPIResponse(response);
 			}
 			
 
 		}
+
+		/// <summary>
+		/// A convenience method so that we can demo the program in the event the public API is dowwn. For demonstration purposes only.
+		/// </summary>
+		public string GetMockResponse() {
+			var filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+			filePath = Directory.GetParent(Directory.GetParent(filePath).FullName).FullName;
+			filePath += @"\SampleAPIResponse.txt";
+			var tr = new StreamReader(filePath);
+			return tr.ReadToEnd();
+		}
+
 
 	}
 }
