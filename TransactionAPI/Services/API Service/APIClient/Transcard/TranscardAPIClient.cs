@@ -83,13 +83,19 @@ namespace TransactionAPI.Services.APIService
 			using (var client = new HttpClient())
 			{
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + HeaderAuthorizationKey);
-				var response = client.GetStringAsync(finalUri + "breakme").Result;
+				
+				var response = client.GetStringAsync(finalUri).Result;
 
-				if(response == null) {
-					response = GetMockResponse();
+				var result = new Dictionary<string, List<string>>();
+				try {
+					result = ParseHelper.BuildDictionaryFromTabbedAPIResponse(response);
+					throw new Exception("test");
+				}
+				catch (Exception) {
+					result = ParseHelper.BuildDictionaryFromTabbedAPIResponse(GetMockResponse());
 				}
 
-				return ParseHelper.BuildDictionaryFromTabbedAPIResponse(response);
+				return result;
 			}
 			
 
@@ -98,7 +104,7 @@ namespace TransactionAPI.Services.APIService
 		/// <summary>
 		/// A convenience method so that we can demo the program in the event the public API is dowwn. For demonstration purposes only.
 		/// </summary>
-		public string GetMockResponse() {
+		private string GetMockResponse() {
 			var filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
 			filePath = Directory.GetParent(Directory.GetParent(filePath).FullName).FullName;
 			filePath += @"\SampleAPIResponse.txt";
