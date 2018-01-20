@@ -89,7 +89,6 @@ namespace TransactionAPI.Services.APIService
 				var result = new Dictionary<string, List<string>>();
 				try {
 					result = ParseHelper.BuildDictionaryFromTabbedAPIResponse(response);
-					throw new Exception("test");
 				}
 				catch (Exception) {
 					result = ParseHelper.BuildDictionaryFromTabbedAPIResponse(GetMockResponse());
@@ -106,7 +105,6 @@ namespace TransactionAPI.Services.APIService
 		/// </summary>
 		private string GetMockResponse() {
 			var filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-			filePath = Directory.GetParent(Directory.GetParent(filePath).FullName).FullName;
 			filePath += @"\SampleAPIResponse.txt";
 			var tr = new StreamReader(filePath);
 			return tr.ReadToEnd();
